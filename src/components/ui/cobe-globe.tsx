@@ -136,7 +136,7 @@ export function Globe({
         glowColor,
         markers: markers.map((m) => ({ location: m.location, size: markerSize })),
         opacity: 0.9,
-        onRender: (state: Record<string, unknown>) => {
+        onRender: (state: Record<string, number>) => {
           if (!isPausedRef.current) {
             phi += speed;
             if (Math.abs(velocity.current.phi) > 0.0001 || Math.abs(velocity.current.theta) > 0.0001) {
@@ -154,7 +154,7 @@ export function Globe({
           state.width = width * dpr;
           state.height = width * dpr;
         },
-      });
+      } as Parameters<typeof createGlobe>[1]);
 
       setTimeout(() => { if (canvas) canvas.style.opacity = "1"; }, 0);
     }
