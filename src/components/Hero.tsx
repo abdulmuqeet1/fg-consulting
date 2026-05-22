@@ -2,16 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight } from "lucide-react";
 import { StarField } from "./StarField";
-import { Globe } from "./ui/cobe-globe";
-
-const globeMarkers = [
-  { id: "dubai", location: [25.2048, 55.2708] as [number, number], label: "Dubai" },
-  { id: "riyadh", location: [24.7136, 46.6753] as [number, number], label: "Riyadh" },
-  { id: "karachi", location: [24.8607, 67.0011] as [number, number], label: "Karachi" },
-  { id: "london", location: [51.5074, -0.1278] as [number, number], label: "London" },
-  { id: "nyc", location: [40.7128, -74.006] as [number, number], label: "New York" },
-  { id: "singapore", location: [1.3521, 103.8198] as [number, number], label: "Singapore" },
-];
+import RotatingEarth from "./ui/rotating-earth";
 
 export function Hero() {
   const { t } = useTranslation();
@@ -19,14 +10,15 @@ export function Hero() {
     <section className="relative isolate flex min-h-screen items-center justify-center overflow-hidden pt-24">
       {/* black backdrop */}
       <div className="absolute inset-0 bg-background" />
-      {/* interactive globe */}
-      <div className="pointer-events-auto absolute left-1/2 top-1/2 z-0 w-[min(90vw,700px)] -translate-x-1/2 -translate-y-1/2 opacity-80">
-        <Globe markers={globeMarkers} />
+      {/* rotating halftone earth */}
+      <div className="pointer-events-auto absolute left-1/2 top-1/2 z-0 w-[min(90vw,700px)] -translate-x-1/2 -translate-y-1/2 opacity-90">
+        <RotatingEarth width={700} height={700} />
       </div>
       {/* converging stars */}
       <StarField count={140} />
       {/* radial vignette */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,rgba(6,11,22,0.85)_80%)]" />
+
 
       <div className="pointer-events-none relative z-10 mx-auto max-w-5xl px-6 text-center [&_a]:pointer-events-auto">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-foreground/80 backdrop-blur">
