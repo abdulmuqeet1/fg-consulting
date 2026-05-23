@@ -20,66 +20,31 @@ export const Route = createFileRoute("/services")({
 function ServicesPage() {
   const { t } = useTranslation();
   const numOfPages = serviceCategories.length;
-  const animTime = 900;
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const scrolling = useRef(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(false);
 
-  // Track when the slider section is the dominant view
+  // Drive active card from native scroll over a tall sticky wrapper.
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => setActive(entry.intersectionRatio > 0.85),
-      { threshold: [0, 0.5, 0.85, 1] }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!active) return;
-
-    const navigate = (dir: 1 | -1) => {
-      setCurrentPage((p) => {
-        const next = p + dir;
-        if (next < 1 || next > numOfPages) return p;
-        return next;
-      });
+    const onScroll = () => {
+      const el = wrapperRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const scrolled = -rect.top;
+      const idx = Math.max(
+        0,
+        Math.min(numOfPages - 1, Math.floor(scrolled / vh + 0.15))
+      );
+      setCurrentPage(idx + 1);
     };
-
-    const handleWheel = (e: WheelEvent) => {
-      const atStart = currentPage === 1 && e.deltaY < 0;
-      const atEnd = currentPage === numOfPages && e.deltaY > 0;
-      if (atStart || atEnd) return; // let page scroll
-      e.preventDefault();
-      if (scrolling.current) return;
-      scrolling.current = true;
-      navigate(e.deltaY > 0 ? 1 : -1);
-      setTimeout(() => (scrolling.current = false), animTime);
-    };
-
-    const handleKey = (e: KeyboardEvent) => {
-      if (scrolling.current) return;
-      if (e.key === "ArrowDown" || e.key === "PageDown") {
-        scrolling.current = true;
-        navigate(1);
-        setTimeout(() => (scrolling.current = false), animTime);
-      } else if (e.key === "ArrowUp" || e.key === "PageUp") {
-        scrolling.current = true;
-        navigate(-1);
-        setTimeout(() => (scrolling.current = false), animTime);
-      }
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("keydown", handleKey);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     return () => {
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("keydown", handleKey);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
-  }, [active, currentPage, numOfPages]);
+  }, [numOfPages]);
 
   return (
     <>
@@ -99,11 +64,14 @@ function ServicesPage() {
         </p>
       </section>
 
-      {/* Split-panel sliding service showcase */}
-      <section
-        ref={sectionRef}
-        className="relative h-screen w-full overflow-hidden bg-background"
+      {/* Split-panel sliding service showcase — tall wrapper drives sticky slider */}
+      <div
+        ref={wrapperRef}
+        style={{ height: `${numOfPages * 100}vh` }}
+        className="relative"
       >
+        <section className="sticky top-0 h-screen w-full overflow-hidden bg-background">
+
         {serviceCategories.map((cat, i) => {
           const idx = i + 1;
           const isActive = currentPage === idx;
@@ -194,6 +162,8 @@ function ServicesPage() {
           {currentPage < numOfPages ? "Scroll ↓" : "End"}
         </div>
       </section>
+      </div>
     </>
+
   );
 }
