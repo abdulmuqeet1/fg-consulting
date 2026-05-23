@@ -162,6 +162,8 @@ function ServicesPage() {
           {currentPage < numOfPages ? "Scroll ↓" : "End"}
         </div>
       </section>
+      </div>
     </>
+
   );
 }
