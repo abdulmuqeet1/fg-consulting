@@ -64,11 +64,14 @@ function ServicesPage() {
         </p>
       </section>
 
-      {/* Split-panel sliding service showcase */}
-      <section
-        ref={sectionRef}
-        className="relative h-screen w-full overflow-hidden bg-background"
+      {/* Split-panel sliding service showcase — tall wrapper drives sticky slider */}
+      <div
+        ref={wrapperRef}
+        style={{ height: `${numOfPages * 100}vh` }}
+        className="relative"
       >
+        <section className="sticky top-0 h-screen w-full overflow-hidden bg-background">
+
         {serviceCategories.map((cat, i) => {
           const idx = i + 1;
           const isActive = currentPage === idx;
