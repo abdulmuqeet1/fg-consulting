@@ -14,7 +14,11 @@ export const Route = createFileRoute("/services")({
         content:
           "Comprehensive professional services: Digital Transformation, Audit, Tax, Advisory, ERP, and more.",
       },
+      { property: "og:title", content: "Services — FG Consulting" },
+      { property: "og:description", content: "Digital Transformation, Audit, Tax, Advisory, ERP, and more." },
+      { property: "og:url", content: "/services" },
     ],
+    links: [{ rel: "canonical", href: "/services" }],
   }),
   component: ServicesPage,
 });
