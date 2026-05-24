@@ -5,7 +5,10 @@ export const Route = createFileRoute("/terms")({
     meta: [
       { title: "Terms & Conditions — FG Consulting" },
       { name: "description", content: "FG Consulting terms and conditions." },
+      { property: "og:title", content: "Terms & Conditions — FG Consulting" },
+      { property: "og:url", content: "/terms" },
     ],
+    links: [{ rel: "canonical", href: "/terms" }],
   }),
   component: TermsPage,
 });
