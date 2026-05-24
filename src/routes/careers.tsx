@@ -8,7 +8,11 @@ export const Route = createFileRoute("/careers")({
     meta: [
       { title: "Careers — FG Consulting" },
       { name: "description", content: "Join FG Consulting. Send us your CV and tell us about yourself." },
+      { property: "og:title", content: "Careers — FG Consulting" },
+      { property: "og:description", content: "Join FG Consulting. Send us your CV and tell us about yourself." },
+      { property: "og:url", content: "/careers" },
     ],
+    links: [{ rel: "canonical", href: "/careers" }],
   }),
   component: CareersPage,
 });
