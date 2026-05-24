@@ -34,7 +34,11 @@ export const Route = createFileRoute("/news")({
     meta: [
       { title: "News & Events — FG Consulting" },
       { name: "description", content: "Insights, announcements and industry updates from FG Consulting." },
+      { property: "og:title", content: "News & Events — FG Consulting" },
+      { property: "og:description", content: "Insights, announcements and industry updates from FG Consulting." },
+      { property: "og:url", content: "/news" },
     ],
+    links: [{ rel: "canonical", href: "/news" }],
   }),
   component: NewsPage,
 });
