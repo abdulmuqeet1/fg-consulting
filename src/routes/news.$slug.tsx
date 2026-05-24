@@ -6,11 +6,34 @@ import { posts } from "./news";
 export const Route = createFileRoute("/news/$slug")({
   head: ({ params }) => {
     const post = posts.find((p) => p.slug === params.slug);
+    const title = post ? `${post.title} — FG Consulting` : "Article — FG Consulting";
+    const desc = post?.excerpt ?? "Article";
+    const url = `/news/${params.slug}`;
     return {
       meta: [
-        { title: post ? `${post.title} — FG Consulting` : "Article — FG Consulting" },
-        { name: "description", content: post?.excerpt ?? "Article" },
+        { title },
+        { name: "description", content: desc },
+        { property: "og:title", content: title },
+        { property: "og:description", content: desc },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
       ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: post
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Article",
+                headline: post.title,
+                description: post.excerpt,
+                datePublished: post.date,
+                articleSection: post.category,
+              }),
+            },
+          ]
+        : [],
     };
   },
   loader: ({ params }) => {

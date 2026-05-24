@@ -5,7 +5,10 @@ export const Route = createFileRoute("/privacy")({
     meta: [
       { title: "Privacy Policy — FG Consulting" },
       { name: "description", content: "FG Consulting privacy policy." },
+      { property: "og:title", content: "Privacy Policy — FG Consulting" },
+      { property: "og:url", content: "/privacy" },
     ],
+    links: [{ rel: "canonical", href: "/privacy" }],
   }),
   component: PrivacyPage,
 });

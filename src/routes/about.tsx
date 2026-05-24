@@ -8,7 +8,11 @@ export const Route = createFileRoute("/about")({
     meta: [
       { title: "About — FG Consulting" },
       { name: "description", content: "Trusted advisors since 2015. Learn about FG Consulting's mission, values, and team." },
+      { property: "og:title", content: "About — FG Consulting" },
+      { property: "og:description", content: "Trusted advisors since 2015. Learn about FG Consulting's mission, values, and team." },
+      { property: "og:url", content: "/about" },
     ],
+    links: [{ rel: "canonical", href: "/about" }],
   }),
   component: AboutPage,
 });

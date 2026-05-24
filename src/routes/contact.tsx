@@ -9,7 +9,11 @@ export const Route = createFileRoute("/contact")({
     meta: [
       { title: "Contact — FG Consulting" },
       { name: "description", content: "Get in touch with FG Consulting. Office in Dubai, UAE." },
+      { property: "og:title", content: "Contact — FG Consulting" },
+      { property: "og:description", content: "Get in touch with FG Consulting. Office in Dubai, UAE." },
+      { property: "og:url", content: "/contact" },
     ],
+    links: [{ rel: "canonical", href: "/contact" }],
   }),
   component: ContactPage,
 });

@@ -9,7 +9,11 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "FG Consulting — Your Digital Transformation Partner" },
       { name: "description", content: "ERP, Audit, Tax, Accounting, and Advisory firm serving the GCC since 2015." },
+      { property: "og:title", content: "FG Consulting — Your Digital Transformation Partner" },
+      { property: "og:description", content: "ERP, Audit, Tax, Accounting, and Advisory firm serving the GCC since 2015." },
+      { property: "og:url", content: "/" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
   component: Index,
 });
