@@ -1,6 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -37,6 +38,19 @@ function AboutPage() {
           ))}
         </div>
       </section>
+
+      {/* CTA */}
+      <section className="relative overflow-hidden border-t border-border/40 mt-24 py-24">
+        <div className="orb" style={{ opacity: 0.4 }} />
+        <div className="relative mx-auto max-w-3xl px-6 text-center">
+          <h2 className="text-4xl font-bold md:text-5xl text-gradient">{t("cta.title")}</h2>
+          <p className="mt-4 text-muted-foreground">{t("cta.desc")}</p>
+          <Link to="/contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-xl shadow-primary/40 hover:scale-105 transition-transform">
+            {t("cta.btn")} <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </section>
     </div>
   );
+
 }
