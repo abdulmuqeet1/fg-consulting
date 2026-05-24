@@ -1,18 +1,36 @@
 import { Link } from "@tanstack/react-router";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight } from "lucide-react";
 import { StarField } from "./StarField";
-import RotatingEarth from "./ui/rotating-earth";
+
+const RotatingEarth = lazy(() => import("./ui/rotating-earth"));
 
 export function Hero() {
   const { t } = useTranslation();
+  const [showEarth, setShowEarth] = useState(false);
+
+  useEffect(() => {
+    // Defer the heavy d3 globe until after first paint / idle
+    const w = window as Window & { requestIdleCallback?: (cb: () => void) => number };
+    const schedule = w.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 200));
+    const id = schedule(() => setShowEarth(true));
+    return () => {
+      if (typeof id === "number") clearTimeout(id);
+    };
+  }, []);
+
   return (
     <section className="relative isolate flex min-h-screen items-center justify-center overflow-hidden pt-24">
       {/* black backdrop */}
       <div className="absolute inset-0 bg-background" />
       {/* rotating halftone earth */}
       <div className="pointer-events-auto absolute left-1/2 top-1/2 z-0 w-[min(90vw,700px)] -translate-x-1/2 -translate-y-1/2 opacity-90">
-        <RotatingEarth width={700} height={700} />
+        {showEarth && (
+          <Suspense fallback={null}>
+            <RotatingEarth width={700} height={700} />
+          </Suspense>
+        )}
       </div>
       {/* converging stars */}
       <StarField count={140} />
