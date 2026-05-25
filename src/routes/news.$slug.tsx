@@ -21,18 +21,18 @@ export const Route = createFileRoute("/news/$slug")({
       links: [{ rel: "canonical", href: url }],
       scripts: post
         ? [
-            {
-              type: "application/ld+json",
-              children: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Article",
-                headline: post.title,
-                description: post.excerpt,
-                datePublished: post.date,
-                articleSection: post.category,
-              }),
-            },
-          ]
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: post.title,
+              description: post.excerpt,
+              datePublished: post.date,
+              articleSection: post.category,
+            }),
+          },
+        ]
         : [],
     };
   },
@@ -52,7 +52,7 @@ export const Route = createFileRoute("/news/$slug")({
 });
 
 function NewsDetail() {
-  const { post } = Route.useLoaderData();
+  const { post }: any = Route.useLoaderData();
   const { t } = useTranslation();
   return (
     <article className="mx-auto max-w-3xl px-6 pt-32 pb-24">
