@@ -9,6 +9,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { location } = useRouterState();
+  const assetBase = import.meta.env.BASE_URL;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -17,7 +18,9 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => { setOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
 
   const toggleLang = () => {
     const next = i18n.language?.startsWith("ar") ? "en" : "ar";
@@ -46,7 +49,11 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold">
-          <img className="grid h-9 w-9 place-items-center rounded-lg" src="fg_consulting-logo.png" alt="FG Consulting" />
+          <img
+            className="grid h-9 w-9 place-items-center rounded-lg"
+            src={`${assetBase}fg_consulting-logo.png`}
+            alt="FG Consulting"
+          />
           <span className="hidden sm:block">FG Consulting</span>
         </Link>
 
