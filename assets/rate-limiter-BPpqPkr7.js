@@ -1,0 +1,1 @@
+function a(e,c=3,n=6e4){if(typeof window>"u")return!0;const o=localStorage.getItem(`rl:${e}`),r=Date.now();let t=o?JSON.parse(o):{count:0,resetAt:r+n};return r>t.resetAt&&(t={count:0,resetAt:r+n}),t.count>=c?(localStorage.setItem(`rl:${e}`,JSON.stringify(t)),!1):(t.count++,localStorage.setItem(`rl:${e}`,JSON.stringify(t)),!0)}export{a as c};
