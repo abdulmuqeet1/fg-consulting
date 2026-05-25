@@ -46,7 +46,7 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold">
-          <img className="grid h-10 w-10 place-items-center" src="/fg_consulting-logo.png" alt="FG Consulting Logo" />
+          <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-primary to-[oklch(0.74_0.14_245)] text-white">FG</span>
           <span className="hidden sm:block">FG Consulting</span>
         </Link>
 
