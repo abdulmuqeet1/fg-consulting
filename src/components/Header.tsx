@@ -1,7 +1,5 @@
-"use client";
-
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Menu, X, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -9,7 +7,7 @@ import { cn } from "@/lib/utils";
 export function Header() {
   const { t, i18n } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
-  const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+  const [open, setOpen] = useState(false);
   const { location } = useRouterState();
 
   useEffect(() => {
@@ -19,11 +17,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    if (mobileMenuRef.current) {
-      mobileMenuRef.current.open = false;
-    }
-  }, [location.pathname]);
+  useEffect(() => { setOpen(false); }, [location.pathname]);
 
   const toggleLang = () => {
     const next = i18n.language?.startsWith("ar") ? "en" : "ar";
@@ -85,35 +79,23 @@ export function Header() {
           >
             {t("nav.enquire")}
           </Link>
-          <details ref={mobileMenuRef} className="group relative lg:hidden">
-            <summary
-              className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-md border border-border/60 hover:bg-white/5 [&::-webkit-details-marker]:hidden"
-              aria-label="Toggle menu"
-            >
-              <Menu className="h-5 w-5 group-open:hidden" />
-              <X className="hidden h-5 w-5 group-open:block" />
-            </summary>
-            <div
-              id="mobile-navigation"
-              className="absolute right-0 top-[calc(100%+0.75rem)] z-[60] w-[min(20rem,calc(100vw-2rem))] rounded-lg border border-border/60 bg-background/95 p-2 shadow-2xl shadow-black/40 backdrop-blur"
-            >
-              <nav className="flex flex-col gap-1">
-                {nav.map((n) => (
-                  <Link
-                    key={n.to}
-                    to={n.to}
-                    className="rounded-md px-3 py-3 text-sm text-foreground/90 hover:bg-white/5 hover:text-foreground"
-                    activeProps={{ className: "rounded-md px-3 py-3 text-sm bg-white/5 text-foreground" }}
-                    activeOptions={{ exact: n.to === "/" }}
-                  >
-                    {n.label}
-                  </Link>
-                ))}
-              </nav>
-            </div>
-          </details>
+          <button className="lg:hidden" onClick={() => setOpen((o) => !o)} aria-label="Menu">
+            {open ? <X /> : <Menu />}
+          </button>
         </div>
       </div>
+
+      {open && (
+        <div className="glass border-t border-border/40 lg:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
+            {nav.map((n) => (
+              <Link key={n.to} to={n.to} className="rounded-md px-3 py-2 text-sm hover:bg-white/5">
+                {n.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
