@@ -10,6 +10,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { location } = useRouterState();
+  const { theme, toggle } = useTheme();
   const assetBase = import.meta.env.BASE_URL;
 
   useEffect(() => {
