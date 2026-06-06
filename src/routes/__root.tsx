@@ -15,6 +15,7 @@ import i18n from "../lib/i18n";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { WhatsAppButton } from "../components/WhatsAppButton";
+import { ThemeProvider } from "../lib/theme";
 
 function NotFoundComponent() {
   return (
