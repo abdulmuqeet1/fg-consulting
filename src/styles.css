@@ -108,11 +108,11 @@
 .star {
   position: absolute;
   width: 2px; height: 2px;
-  background: white;
+  background: var(--star-color, white);
   border-radius: 50%;
   top: 50%; left: 50%;
   animation: star-in linear infinite;
-  box-shadow: 0 0 6px rgba(255,255,255,.6);
+  box-shadow: 0 0 6px var(--star-color, rgba(255,255,255,.6));
 }
 
 @keyframes orb-spin {
