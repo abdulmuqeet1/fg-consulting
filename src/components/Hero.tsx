@@ -28,7 +28,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-background" />
       {/* rotating halftone earth */}
       <div className="pointer-events-auto absolute left-1/2 top-1/2 z-0 w-[min(90vw,700px)] -translate-x-1/2 -translate-y-1/2 opacity-90">
-        {showEarth && (
+        {showEarth && theme === "dark" && (
           <Suspense fallback={null}>
             <RotatingEarth
               width={700}

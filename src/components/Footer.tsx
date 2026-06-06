@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { StarField } from "./StarField";
+import { useTheme } from "@/lib/theme";
 
 const social = [
   { name: "facebook", url: "" },
@@ -12,6 +13,7 @@ const social = [
 
 export function Footer() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const assetBase = import.meta.env.BASE_URL;
 
   return (
@@ -21,8 +23,13 @@ export function Footer() {
         <div className="md:col-span-2">
           <div className="flex items-center gap-2 font-display text-xl font-bold">
             <img
-              className="grid h-9 w-9 place-items-center rounded-lg"
-              src={`${assetBase}fg_consulting-logo.png`}
+              className="grid h-9 w-9 place-items-center rounded-lg dark:hidden"
+              src={theme === "dark" ? `${assetBase}fg_consulting-logo.png` : `${assetBase}fg_consulting-logo_blue.png`}
+              alt="FG Consulting"
+            />
+            <img
+              className="hidden h-9 w-9 place-items-center rounded-lg dark:grid"
+              src={theme === "dark" ? `${assetBase}fg_consulting-logo.png` : `${assetBase}fg_consulting-logo_blue.png`}
               alt="FG Consulting"
             />
             FG Consulting

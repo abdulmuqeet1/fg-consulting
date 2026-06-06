@@ -53,7 +53,7 @@ export function Header() {
         <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold">
           <img
             className="grid h-9 w-9 place-items-center rounded-lg"
-            src={`${assetBase}fg_consulting-logo.png`}
+            src={theme === "dark" ? `${assetBase}fg_consulting-logo.png` : `${assetBase}fg_consulting-logo_blue.png`}
             alt="FG Consulting"
           />
           <span className="hidden sm:block">FG Consulting</span>

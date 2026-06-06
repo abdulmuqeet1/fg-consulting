@@ -186,7 +186,7 @@ export default function RotatingEarth({
 
     const rotation: [number, number] = [0, -10];
     let autoRotate = true;
-    const rotationSpeed = 0.25;
+    const rotationSpeed = 0.15;
 
     const rotationTimer = d3.timer(() => {
       if (autoRotate) {
