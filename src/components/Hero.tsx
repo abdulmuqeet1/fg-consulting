@@ -3,11 +3,13 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight } from "lucide-react";
 import { StarField } from "./StarField";
+import { useTheme } from "@/lib/theme";
 
 const RotatingEarth = lazy(() => import("./ui/rotating-earth"));
 
 export function Hero() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const [showEarth, setShowEarth] = useState(false);
 
   useEffect(() => {
