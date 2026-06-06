@@ -30,7 +30,12 @@ export function Hero() {
       <div className="pointer-events-auto absolute left-1/2 top-1/2 z-0 w-[min(90vw,700px)] -translate-x-1/2 -translate-y-1/2 opacity-90">
         {showEarth && (
           <Suspense fallback={null}>
-            <RotatingEarth width={700} height={700} />
+            <RotatingEarth
+              width={700}
+              height={700}
+              oceanColor={theme === "dark" ? "#060b16" : "#ffffff"}
+              strokeColor={theme === "dark" ? "rgba(248,250,252,0.55)" : "rgba(20,20,40,0.4)"}
+            />
           </Suspense>
         )}
       </div>
