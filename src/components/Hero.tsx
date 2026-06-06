@@ -34,8 +34,14 @@ export function Hero() {
       </div>
       {/* converging stars */}
       <StarField count={140} />
-      {/* radial vignette */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,rgba(6,11,22,0.85)_80%)]" />
+      {/* radial vignette (matches theme background) */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at center, transparent 45%, var(--background) 80%)",
+        }}
+      />
 
 
       <div className="pointer-events-none relative z-10 mx-auto max-w-5xl px-6 text-center [&_a]:pointer-events-auto">
