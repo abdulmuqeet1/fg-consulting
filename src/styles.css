@@ -37,14 +37,38 @@
 
 :root {
   --radius: 0.75rem;
-  /* FG dark palette */
-  --background: oklch(0.14 0.025 270);          /* #060b16 */
-  --foreground: oklch(0.97 0.005 250);          /* #f8fafc */
-  --card: oklch(0.18 0.03 268);                 /* #0d1323 */
+  /* FG light palette (default) */
+  --background: oklch(0.99 0.003 250);
+  --foreground: oklch(0.18 0.03 268);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.03 268);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.03 268);
+  --primary: oklch(0.55 0.22 295);
+  --primary-foreground: oklch(0.99 0.005 250);
+  --secondary: oklch(0.96 0.01 268);
+  --secondary-foreground: oklch(0.2 0.03 268);
+  --muted: oklch(0.96 0.01 268);
+  --muted-foreground: oklch(0.45 0.03 260);
+  --accent: oklch(0.55 0.22 295);
+  --accent-foreground: oklch(0.99 0.005 250);
+  --destructive: oklch(0.62 0.24 22);
+  --destructive-foreground: oklch(0.99 0.005 250);
+  --border: oklch(0.2 0.03 268 / 12%);
+  --input: oklch(0.2 0.03 268 / 12%);
+  --ring: oklch(0.55 0.22 295);
+  --sky: oklch(0.65 0.16 245);
+  --star-color: rgba(20, 20, 40, 0.7);
+}
+
+.dark {
+  --background: oklch(0.14 0.025 270);
+  --foreground: oklch(0.97 0.005 250);
+  --card: oklch(0.18 0.03 268);
   --card-foreground: oklch(0.97 0.005 250);
   --popover: oklch(0.18 0.03 268);
   --popover-foreground: oklch(0.97 0.005 250);
-  --primary: oklch(0.62 0.22 295);              /* #814ac8 */
+  --primary: oklch(0.62 0.22 295);
   --primary-foreground: oklch(0.97 0.005 250);
   --secondary: oklch(0.22 0.04 268);
   --secondary-foreground: oklch(0.97 0.005 250);
@@ -57,14 +81,14 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 10%);
   --ring: oklch(0.62 0.22 295);
-  --sky: oklch(0.74 0.14 245);                  /* #60a5fa */
+  --sky: oklch(0.74 0.14 245);
+  --star-color: rgba(255, 255, 255, 1);
 }
-
-.dark { /* keep same */ }
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { color-scheme: dark; }
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -73,6 +97,7 @@
   }
   h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
 }
+
 
 /* === Star field === */
 @keyframes star-in {
@@ -83,11 +108,11 @@
 .star {
   position: absolute;
   width: 2px; height: 2px;
-  background: white;
+  background: var(--star-color, white);
   border-radius: 50%;
   top: 50%; left: 50%;
   animation: star-in linear infinite;
-  box-shadow: 0 0 6px rgba(255,255,255,.6);
+  box-shadow: 0 0 6px var(--star-color, rgba(255,255,255,.6));
 }
 
 @keyframes orb-spin {
@@ -122,7 +147,7 @@
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #fff 0%, #c4b5fd 50%, #60a5fa 100%);
+  background: linear-gradient(135deg, var(--foreground) 0%, #814ac8 50%, #60a5fa 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
