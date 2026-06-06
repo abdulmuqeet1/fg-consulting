@@ -75,6 +75,13 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <button
+            onClick={toggle}
+            className="flex items-center justify-center rounded-md border border-border/60 p-1.5 hover:bg-foreground/5"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
+          </button>
+          <button
             onClick={toggleLang}
             className="flex items-center gap-1.5 rounded-md border border-border/60 px-3 py-1.5 text-xs font-medium hover:bg-white/5"
             aria-label="Toggle language"
