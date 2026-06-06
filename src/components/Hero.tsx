@@ -3,11 +3,13 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight } from "lucide-react";
 import { StarField } from "./StarField";
+import { useTheme } from "@/lib/theme";
 
 const RotatingEarth = lazy(() => import("./ui/rotating-earth"));
 
 export function Hero() {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const [showEarth, setShowEarth] = useState(false);
 
   useEffect(() => {
@@ -28,14 +30,25 @@ export function Hero() {
       <div className="pointer-events-auto absolute left-1/2 top-1/2 z-0 w-[min(90vw,700px)] -translate-x-1/2 -translate-y-1/2 opacity-90">
         {showEarth && (
           <Suspense fallback={null}>
-            <RotatingEarth width={700} height={700} />
+            <RotatingEarth
+              width={700}
+              height={700}
+              oceanColor={theme === "dark" ? "#060b16" : "#ffffff"}
+              strokeColor={theme === "dark" ? "rgba(248,250,252,0.55)" : "rgba(20,20,40,0.4)"}
+            />
           </Suspense>
         )}
       </div>
       {/* converging stars */}
       <StarField count={140} />
-      {/* radial vignette */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,rgba(6,11,22,0.85)_80%)]" />
+      {/* radial vignette (matches theme background) */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at center, transparent 45%, var(--background) 80%)",
+        }}
+      />
 
 
       <div className="pointer-events-none relative z-10 mx-auto max-w-5xl px-6 text-center [&_a]:pointer-events-auto">
