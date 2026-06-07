@@ -1,1 +1,0 @@
-import{j as t,L as e}from"./index-C3ESH8sN.js";const o=()=>t.jsxs("div",{className:"pt-40 pb-24 text-center",children:[t.jsx("h1",{className:"text-3xl font-bold",children:"Article not found"}),t.jsx(e,{to:"/news",className:"mt-6 inline-flex text-primary hover:underline",children:"Back to News"})]});export{o as notFoundComponent};
