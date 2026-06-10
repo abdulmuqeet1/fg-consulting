@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { StarField } from "./StarField";
 import { useTheme } from "@/lib/theme";
+import { MuqeetCredit } from "./MuqeetCredit";
 
 const social = [
   { name: "facebook", url: "" },
@@ -111,8 +112,9 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="relative border-t border-border/30 py-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} FG Consulting. {t("footer.rights")}
+      <div className="mx-auto flex max-w-7xl mt-16 pt-8 pb-10 border-t border-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-foreground/50">
+        <div>© {new Date().getFullYear()} MN Studio. {t("footer.rights")}</div>
+        <div><MuqeetCredit /></div>
       </div>
     </footer>
   );

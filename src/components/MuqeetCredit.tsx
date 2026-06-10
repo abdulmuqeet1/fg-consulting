@@ -17,10 +17,10 @@ export const MuqeetCredit = () => {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-1 text-secondary-foreground/70 transition-colors hover:text-primary-glow"
+                className="group inline-flex items-center gap-1 text-sm text-foreground/50 transition-colors hover:text-primary-glow"
             >
                 Designed &amp; developed by{" "}
-                <span className="font-medium text-secondary-foreground underline decoration-primary-glow/40 decoration-1 underline-offset-2 group-hover:decoration-primary-glow">
+                <span className="font-medium text-accent underline decoration-primary-glow/40 decoration-1 underline-offset-2 group-hover:decoration-primary-glow">
                     Muqeet
                 </span>
                 <ExternalLink className="h-3 w-3 opacity-60 transition-opacity group-hover:opacity-100" />
